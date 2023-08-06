@@ -1,7 +1,9 @@
+import StartingPageContent from "@/components/startingPage/StartingPage";
+
 function HomePage() {
   return (
     <>
-      <h1>This is HomePage</h1>
+      <StartingPageContent />
     </>
   );
 }
