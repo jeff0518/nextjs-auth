@@ -1,6 +1,7 @@
 import { connectToDatabase } from "@/lib/db";
 import { verifyPassword } from "../../../lib/auth";
 import NextAuth from "next-auth";
+//跟課程不一樣，改版要改用這個 https://next-auth.js.org/providers/credentials
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({

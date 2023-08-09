@@ -43,7 +43,8 @@ function AuthForm() {
         password: enteredPassword,
       });
 
-      console.log(result);
+      if (!result) {
+      }
     } else {
       try {
         const result = await createUser(enteredEmail, enteredPassword);
