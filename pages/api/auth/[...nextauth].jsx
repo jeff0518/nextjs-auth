@@ -1,12 +1,13 @@
-import { connectToDatabase } from "@/lib/db";
-import { verifyPassword } from "../../../lib/auth";
 import NextAuth from "next-auth";
-//跟課程不一樣，改版要改用這個 https://next-auth.js.org/providers/credentials
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export default NextAuth({
+import { verifyPassword } from "../../../lib/auth";
+import { connectToDatabase } from "../../../lib/db";
+
+export const authOptions = {
+  secret: "mOZyy7fN9g17QPTgLTW/9/r2fn/RcjRgwiSiGmBCKzA=",
   session: {
-    jwt: true,
+    strategy: "jwt",
   },
   providers: [
     CredentialsProvider({
@@ -21,7 +22,7 @@ export default NextAuth({
 
         if (!user) {
           client.close();
-          throw new Error("no user found");
+          throw new Error("No user found!");
         }
 
         const isValid = await verifyPassword(
@@ -30,6 +31,7 @@ export default NextAuth({
         );
 
         if (!isValid) {
+          client.close();
           throw new Error("Could not log you in!");
         }
 
@@ -38,4 +40,6 @@ export default NextAuth({
       },
     }),
   ],
-});
+};
+
+export default NextAuth(authOptions);
